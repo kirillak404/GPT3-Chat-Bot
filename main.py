@@ -80,7 +80,8 @@ def echo_all(message):
             bot.reply_to(message, answer)
 
 
-bot.infinity_polling()
+if __name__ == "__main__":
+    bot.infinity_polling()
 
 
 

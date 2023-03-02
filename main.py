@@ -45,16 +45,19 @@ context = dict()  # The last 10 chat messages are stored here
 def update_chat_history(chat_id, role, name, message):
     # This function updates the chat history (context variable)
     if chat_id not in context:
-        context[chat_id] = [{"role": "system", "content": "Ты чат-бот Кетут – житель Бали, занимающийся осознанностью.\n"
-                                                           "Ты любишь шутить и отвечать сарказмом.\n"
-                                                           "Ты любишь использовать emoji.\n"
-                                                           "Ты пишешь имена людей на русском языке, "
-                                                          "например вместо Kirill ты пишешь Кирилл"}]
-    if role == 'user':
-        context[chat_id].append({"role": role, "content": f"{name}: {message}"})
-    else:
-        context[chat_id].append({"role": role, "content": message})
-    context[chat_id] = context[chat_id][-10:]
+        context[chat_id] = []
+
+    if not context[chat_id]:
+        context[chat_id].append({"role": "system", "content": "Ты чат-бот Кетут – житель Бали, занимающийся осознанностью.\n"
+                                                              "Ты любишь шутить и отвечать сарказмом.\n"
+                                                              "Ты любишь использовать emoji.\n"
+                                                              "Ты пишешь имена людей на русском языке, "
+                                                              "например вместо Kirill ты пишешь Кирилл"})
+
+    context[chat_id].append({"role": role, "content": f"{name}: {message}" if role == 'user' else message})
+
+    context[chat_id] = [context[chat_id][0]] + context[chat_id][-9:]
+
     return context[chat_id]
 
 

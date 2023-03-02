@@ -39,7 +39,7 @@ def request_openai_chat_response(chat_history):
         return False
 
 
-context = dict()  # The last 20 chat messages are stored here
+context = dict()  # The last 10 chat messages are stored here
 
 
 def update_chat_history(chat_id, role, name, message):
@@ -54,7 +54,7 @@ def update_chat_history(chat_id, role, name, message):
         context[chat_id].append({"role": role, "content": f"{name}: {message}"})
     else:
         context[chat_id].append({"role": role, "content": message})
-    context[chat_id] = context[chat_id][-20:]
+    context[chat_id] = context[chat_id][-10:]
     return context[chat_id]
 
 

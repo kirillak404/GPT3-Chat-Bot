@@ -70,7 +70,7 @@ def echo_all(message):
     if 'кетут' in message.text.lower() \
             or message.chat.type == 'private' \
             or (message.reply_to_message and message.reply_to_message.from_user.id == 5615844922) \
-            or (len(message.text) >= 50 and random.randint(1, 3) == 3):
+            or (len(message.text) >= 60 and random.randint(1, 5) == 5):
 
         bot.send_chat_action(message.chat.id, 'typing')
         answer = request_openai_chat_response(chat_history)  # Getting a response to a message from OpenAI
@@ -85,33 +85,3 @@ def echo_all(message):
 
 if __name__ == "__main__":
     bot.infinity_polling()
-
-
-
-
-
-# def send_morning_message():
-#     # This function sends a morning message to the chat at 10:00 every day
-#     text = 'Тебя зовут Кетут (мужской пол), ты живешь на Бали и ты умный чат-бот. ' \
-#            'Напиши забавное и развернутое сообщение в стихах, ' \
-#            'где сначала идет общее пожеланиями доброго утра всем, кто на острове Бали, ' \
-#            'а затем пожелай каждому в участнику чата (Кирилл, Саша, Луиза, Ваня, Марина) ' \
-#            'в отдельности что-нибудь хорошее. ' \
-#            'Добавь в сообщение emoji.'
-#     good_morning_text = request_openai_answer(text)
-#     bot.send_message(chat_id=-1001717963418, text=good_morning_text)
-
-# schedule.every().day.at("10:00").do(send_morning_message)
-
-
-# def run_schedule():
-#     while True:
-#         schedule.run_pending()
-#         time.sleep(1)
-
-# if __name__ == "__main__":
-#     import threading
-#
-#     schedule_thread = threading.Thread(target=run_schedule)
-#     schedule_thread.start()
-#     bot.infinity_polling()
